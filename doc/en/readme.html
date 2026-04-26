@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Groq Vision Image Describer</title>
+</head>
+<body>
+<h1>Groq Vision Image Describer</h1>
+<p><strong>Author:</strong> Antigravity, Ulises Milani</p>
+<p><strong>Version:</strong> 1.0.0</p>
+
+<h2>Description</h2>
+<p>This is a global add-on for the NVDA screen reader. Its goal is to provide detailed image descriptions using advanced artificial intelligence (vision models).</p>
+<p>The add-on is capable of reading the original path of selected images in Windows Explorer to send them in maximum quality. If you are using an application where there is no physical file selected (e.g., browsing the web or using WhatsApp), the add-on will intelligently take a screenshot of the area where the NVDA focus is currently located and send it for analysis.</p>
+
+<h2>Keyboard Shortcuts</h2>
+<ul>
+<li><code>NVDA + Shift + V</code>: Analyzes and describes the currently focused image or the selected file in Windows Explorer.</li>
+</ul>
+
+<h2>API Configuration (For Developers/Advanced Users)</h2>
+<p>The add-on connects to <strong>OpenRouter</strong> servers to process the image using the free NVIDIA Vision model. For it to work correctly, you must provide your own OpenRouter API key in the source code.</p>
+<ol>
+<li>Unzip the <code>.nvda-addon</code> file or navigate to the add-on folder inside your NVDA user configuration directory (<code>%appdata%\nvda\addons\groqVision\globalPlugins\</code>).</li>
+<li>Open the <code>groqVision.py</code> file with a text editor (like Notepad).</li>
+<li>At the top of the file, find the <code>OPENROUTER_API_KEY</code> variable and paste your key generated at <a href="https://openrouter.ai/">OpenRouter</a>.</li>
+<li>Save the changes and restart NVDA.</li>
+</ol>
+
+<h2>Known Limitations</h2>
+<p>As it uses the free tier of the APIs, the service may be congested or have strict rate limits depending on OpenRouter.</p>
+
+</body>
+</html>

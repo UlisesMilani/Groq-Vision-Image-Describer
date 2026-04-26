@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Groq Vision Image Describer</title>
+</head>
+<body>
+<h1>Groq Vision Image Describer</h1>
+<p><strong>Autor:</strong> Antigravity, Ulises Milani</p>
+<p><strong>Versión:</strong> 1.0.0</p>
+
+<h2>Descripción</h2>
+<p>Este es un complemento global para el lector de pantalla NVDA. Su objetivo es proporcionar descripciones detalladas de imágenes utilizando inteligencia artificial avanzada (modelos de visión).</p>
+<p>El complemento es capaz de leer la ruta original de las imágenes seleccionadas en el Explorador de Windows para enviarlas en máxima calidad. Si estás usando una aplicación donde no hay un archivo físico seleccionado (por ejemplo, navegando por internet o usando WhatsApp), el complemento tomará inteligentemente una captura del área donde se encuentra el foco actual de NVDA y la enviará para su análisis.</p>
+
+<h2>Atajos de teclado</h2>
+<ul>
+<li><code>NVDA + Shift + V</code>: Analiza y describe la imagen enfocada actualmente o el archivo seleccionado en el Explorador de Windows.</li>
+</ul>
+
+<h2>Configuración de la API (Para Desarrolladores/Usuarios Avanzados)</h2>
+<p>El complemento se conecta a los servidores de <strong>OpenRouter</strong> para procesar la imagen usando el modelo gratuito de NVIDIA Vision. Para que funcione correctamente, debes proveer tu propia clave API de OpenRouter en el código fuente.</p>
+<ol>
+<li>Descomprime el archivo <code>.nvda-addon</code> o ve a la carpeta del complemento dentro de tu instalación de NVDA (<code>%appdata%\nvda\addons\groqVision\globalPlugins\</code>).</li>
+<li>Abre el archivo <code>groqVision.py</code> con un editor de texto (como el Bloc de notas).</li>
+<li>En la parte superior, busca la variable <code>OPENROUTER_API_KEY</code> y pega allí tu clave generada en <a href="https://openrouter.ai/">OpenRouter</a>.</li>
+<li>Guarda los cambios y reinicia NVDA.</li>
+</ol>
+
+<h2>Limitaciones conocidas</h2>
+<p>Como utiliza la capa gratuita de las APIs, es posible que el servicio esté congestionado o tenga límites de uso estrictos dependiendo de OpenRouter.</p>
+
+</body>
+</html>
