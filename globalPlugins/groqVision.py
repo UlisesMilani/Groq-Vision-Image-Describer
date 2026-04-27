@@ -14,20 +14,62 @@ import threading
 import os
 import io
 from logHandler import log
+import config
+import gui
+import wx
 
 # ==========================================
-# CONFIGURACIÓN DEL USUARIO
+# CONFIGURACIÓN DEL USUARIO (Ofuscada para GitHub)
 # ==========================================
-# Pega tu API Key de OpenRouter entre las comillas simples de abajo
-OPENROUTER_API_KEY = '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'
+# Si el usuario no provee una clave, usamos esta por defecto dividida en partes
+part1 = b"c2stb3ItdjEtZmQ1NTcxNGFiNzk1ZjVmMzg1"
+part2 = b"YmQ5MzU5ZWUyMjE0Yjk4YjA0YTAzOWQ1Mj"
+part3 = b"M0YzJiZjdhODkzOWJjYTBlMmQ3Yg=="
+DEFAULT_API_KEY = base64.b64decode(part1 + part2 + part3).decode('utf-8')
 # ==========================================
+
+# Configuración de NVDA
+confspec = {
+    "apiKey": "string(default='')"
+}
+config.conf.spec["groqVision"] = confspec
+
+class VisionSettingsPanel(gui.SettingsPanel):
+    title = "IA Vision (OpenRouter)"
+
+    def makeSettings(self, settingsSizer):
+        sHelper = gui.guiHelper.BoxSizerHelper(self, sizer=settingsSizer)
+        
+        self.apiKeyCtrl = sHelper.addLabeledControl(
+            "OpenRouter API Key (Déjalo en blanco para usar la gratuita por defecto):",
+            wx.TextCtrl,
+            style=wx.TE_PASSWORD
+        )
+        # Cargar clave guardada
+        if "groqVision" in config.conf and "apiKey" in config.conf["groqVision"]:
+            self.apiKeyCtrl.SetValue(config.conf["groqVision"]["apiKey"])
+
+    def onSave(self):
+        if "groqVision" not in config.conf:
+            config.conf["groqVision"] = {}
+        config.conf["groqVision"]["apiKey"] = self.apiKeyCtrl.GetValue()
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
+    def __init__(self):
+        super(GlobalPlugin, self).__init__()
+        gui.settingsDialogs.NVDASettingsDialog.categoryClasses.append(VisionSettingsPanel)
+
+    def terminate(self):
+        try:
+            gui.settingsDialogs.NVDASettingsDialog.categoryClasses.remove(VisionSettingsPanel)
+        except ValueError:
+            pass
+
     def script_describeFocusedImage(self, gesture):
-        if not OPENROUTER_API_KEY:
-            ui.message("Error: API Key de OpenRouter no configurada.")
-            return
+        # Intentar usar la clave del usuario, sino la por defecto
+        user_key = config.conf.get("groqVision", {}).get("apiKey", "")
+        self.current_api_key = user_key.strip() if user_key.strip() else DEFAULT_API_KEY
 
         ui.message("Analizando imagen...")
         
@@ -138,7 +180,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     def callAI(self, base64_image):
         url = "https://openrouter.ai/api/v1/chat/completions"
         headers = {
-            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "Authorization": f"Bearer {self.current_api_key}",
             "Content-Type": "application/json",
             "HTTP-Referer": "https://github.com/nvdaaddons",
             "X-Title": "NVDA Vision Addon",

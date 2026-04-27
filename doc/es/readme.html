@@ -21,11 +21,12 @@
 <h2>Configuración de la API (Para Desarrolladores/Usuarios Avanzados)</h2>
 <p>El complemento se conecta a los servidores de <strong>OpenRouter</strong> para procesar la imagen usando el modelo gratuito de NVIDIA Vision. Para que funcione correctamente, debes proveer tu propia clave API de OpenRouter en el código fuente.</p>
 <ol>
-<li>Descomprime el archivo <code>.nvda-addon</code> o ve a la carpeta del complemento dentro de tu instalación de NVDA (<code>%appdata%\nvda\addons\groqVision\globalPlugins\</code>).</li>
-<li>Abre el archivo <code>groqVision.py</code> con un editor de texto (como el Bloc de notas).</li>
-<li>En la parte superior, busca la variable <code>OPENROUTER_API_KEY</code> y pega allí tu clave generada en <a href="https://openrouter.ai/">OpenRouter</a>.</li>
-<li>Guarda los cambios y reinicia NVDA.</li>
+<li>Abre el menú de NVDA (<code>Insert + N</code>).</li>
+<li>Ve a <strong>Preferencias</strong> y luego a <strong>Opciones</strong>.</li>
+<li>Busca la categoría <strong>IA Vision (OpenRouter)</strong> en la lista de la izquierda.</li>
+<li>Pega tu clave en el cuadro de texto y pulsa <strong>Aceptar</strong>.</li>
 </ol>
+<p>Nota: Si dejas el cuadro en blanco, el complemento intentará usar una clave gratuita por defecto, la cual podría estar más lenta si muchos usuarios la están utilizando al mismo tiempo.</p>
 
 <h2>Limitaciones conocidas</h2>
 <p>Como utiliza la capa gratuita de las APIs, es posible que el servicio esté congestionado o tenga límites de uso estrictos dependiendo de OpenRouter.</p>

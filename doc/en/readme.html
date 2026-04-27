@@ -21,11 +21,12 @@
 <h2>API Configuration (For Developers/Advanced Users)</h2>
 <p>The add-on connects to <strong>OpenRouter</strong> servers to process the image using the free NVIDIA Vision model. For it to work correctly, you must provide your own OpenRouter API key in the source code.</p>
 <ol>
-<li>Unzip the <code>.nvda-addon</code> file or navigate to the add-on folder inside your NVDA user configuration directory (<code>%appdata%\nvda\addons\groqVision\globalPlugins\</code>).</li>
-<li>Open the <code>groqVision.py</code> file with a text editor (like Notepad).</li>
-<li>At the top of the file, find the <code>OPENROUTER_API_KEY</code> variable and paste your key generated at <a href="https://openrouter.ai/">OpenRouter</a>.</li>
-<li>Save the changes and restart NVDA.</li>
+<li>Open the NVDA menu (<code>Insert + N</code>).</li>
+<li>Go to <strong>Preferences</strong> and then <strong>Settings</strong>.</li>
+<li>Look for the <strong>IA Vision (OpenRouter)</strong> category in the list on the left.</li>
+<li>Paste your key in the text box and press <strong>OK</strong>.</li>
 </ol>
+<p>Note: If you leave the box blank, the add-on will try to use a free default key, which might be slower if many users are using it at the same time.</p>
 
 <h2>Known Limitations</h2>
 <p>As it uses the free tier of the APIs, the service may be congested or have strict rate limits depending on OpenRouter.</p>
